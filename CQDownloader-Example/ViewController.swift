@@ -21,7 +21,7 @@ class ViewController: UIViewController {
     @IBAction func addToDownload() {
         
         let number = Int.random(in: 1 ..< 999)
-        let downloadURL = URL(string:"https://picsum.photos/1200/1200/?image=\(number)")!
+        let downloadURL = URL(string:"https://picsum.photos/800/1200/?image=\(number)")!
         
         self.performSegue(withIdentifier: "gotoDownload", sender: downloadURL)
         

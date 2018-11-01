@@ -81,6 +81,7 @@ class CQDownloaderCell: UITableViewCell {
             progressBar.setProgress(p, animated: true)
             
             pauseButton.isEnabled = true
+             pauseButton.isHidden = false
             switch downloadItem.status {
             case .Done:
                 pauseButton.isHidden = true

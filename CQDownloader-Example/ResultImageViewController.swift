@@ -14,7 +14,6 @@ class ResultImageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        Data(contentsOf: URL(fileURLWithPath: self.imagePath, isDirectory: false))
         imageView.image = UIImage(contentsOfFile: imagePath)
     }
 }
