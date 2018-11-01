@@ -21,7 +21,7 @@ class ViewController: UIViewController {
     @IBAction func addToDownload() {
         
         let number = Int.random(in: 1 ..< 999)
-        let downloadURL = URL(string:"https://picsum.photos/800/1200/?image=\(number)")!
+        let downloadURL = URL(string:"https://picsum.photos/800/800/?image=\(number)")!
         
         self.performSegue(withIdentifier: "gotoDownload", sender: downloadURL)
         
@@ -38,27 +38,7 @@ class ViewController: UIViewController {
     }
     
     
-//    @IBAction func addToDownload() {
-//
-//
-//        let data = ["Title" : "\(number)"]
-//        downloader.download(remoteURL: downloadURL, filePathURL: downloader.documentURL(fileName: "\(number).zip"), data: data, onProgressHandler: { (downloadItem: CQDownloadItem) in
-//            print(downloadItem.progress)
-//        }, completionHandler: { (result:DataRequestResult<URL>) in
-//            switch result {
-//            case .success(let url):
-//                    print("Finish \(url)")
-//            case .failure(let error):
-//                print("CANCEL OR FAIL")
-//                }
-//        })
-//
-//    }
-//
-//    @IBAction func pauseAndResume() {
-//        downloader.toggleDownloadAction(remoteURL: downloadURL)
-//    }
-    
+
     
 
 
