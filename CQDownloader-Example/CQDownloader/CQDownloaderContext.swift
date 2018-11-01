@@ -28,7 +28,7 @@ class CQDownloaderContext {
     }
     
     private func loadDownloadItemFromStorage(withURL url: URL) -> CQDownloadItem? {
-        guard let encodedData = userDefaults.object(forKey: url.path) as? Data else {
+        guard let encodedData = userDefaults.object(forKey: url.absoluteString) as? Data else {
             return nil
         }
         

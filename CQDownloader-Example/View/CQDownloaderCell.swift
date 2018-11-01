@@ -8,6 +8,43 @@
 
 import UIKit
 
+public struct Units {
+    
+    public let bytes: Int64
+    
+    public var kilobytes: Double {
+        return Double(bytes) / 1_024
+    }
+    
+    public var megabytes: Double {
+        return kilobytes / 1_024
+    }
+    
+    public var gigabytes: Double {
+        return megabytes / 1_024
+    }
+    
+    public init(bytes: Int64) {
+        self.bytes = bytes
+    }
+    
+    public func getReadableUnit() -> String {
+        
+        switch bytes {
+        case 0..<1_024:
+            return "\(bytes) bytes"
+        case 1_024..<(1_024 * 1_024):
+            return "\(String(format: "%.2f", kilobytes)) kb"
+        case 1_024..<(1_024 * 1_024 * 1_024):
+            return "\(String(format: "%.2f", megabytes)) mb"
+        case (1_024 * 1_024 * 1_024)...Int64.max:
+            return "\(String(format: "%.2f", gigabytes)) gb"
+        default:
+            return "\(bytes) bytes"
+        }
+    }
+}
+
 class CQDownloaderCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
@@ -19,8 +56,14 @@ class CQDownloaderCell: UITableViewCell {
     func updateCell() {
         if let url = remoteURL , let downloadItem = CQDownloader.shared.downloadItem(remoteURL: url) {
             titleLabel.text = downloadItem.data["Title"]
-            progressLabel.text = "\(downloadItem.currentFileSize) / \(downloadItem.totalFileSize) Bytes"
-            percentageLabel.text = "\(downloadItem.progress * 100) %"
+            
+            let currentSize = Units(bytes: Int64(downloadItem.currentFileSize)).getReadableUnit()
+            let totalSize = Units(bytes: Int64(downloadItem.totalFileSize)).getReadableUnit()
+            
+            
+            progressLabel.text = "\(currentSize) / \(totalSize)"
+            var percentage = Int(downloadItem.progress * 100)
+            percentageLabel.text = "\(percentage) %"
             
             var p = downloadItem.progress
             if p > 1 {

@@ -124,11 +124,13 @@ extension TableViewController: CQDownloaderDelegate {
     
     private func updateCell(remoteURL: URL) {
         if let row = self.dataSource.firstIndex(of: remoteURL.absoluteString) {
+           
             DispatchQueue.main.async {
+                
                 if let cell = self.tableView.cellForRow(at: IndexPath(row: row, section: 0)) as? CQDownloaderCell {
-                    cell.remoteURL = remoteURL
                     cell.updateCell()
                 }
+                
             }
             
         }
