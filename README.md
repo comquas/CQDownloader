@@ -8,4 +8,4 @@ Base on the [https://github.com/wibosco/BackgroundTransfer-Example](https://gith
 - [x] Download with progress callback
 - [x] Download finish callback
 - [x] Pause/Resume (90% done)
-- [ ] With TableView Design
+- [x] With TableView Design

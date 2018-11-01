@@ -16,13 +16,15 @@ enum DataRequestResult<T> {
 typealias ProgressDownloadingHandler = ((_ item: CQDownloadItem ) -> Void)
 typealias ForegroundDownloadCompletionHandler = ((_ result: DataRequestResult<URL>) -> Void)
 
-enum CQDownloadStatus : Int, Codable {
-    case Done = 1
-    case Pause = 2
-    case Fail = 3
-    case Progress = 4
-    case None = 0
+enum CQDownloadStatus : String,Codable {
+    case None = "0"
+    case Done = "1"
+    case Pause = "2"
+    case Fail = "3"
+    case Progress = "4"
+
 }
+
 class CQDownloadItem: Codable {
     
     var data: [String:String] = [:]
@@ -33,7 +35,7 @@ class CQDownloadItem: Codable {
     var totalFileSize: Double = 0.0
     var currentFileSize: Double = 0.0
     var progress: Float = 0.0
-    var resumeData: String = ""
+    var resumeDataPath: String = ""
     
     var foregroundCompletionHandler: ForegroundDownloadCompletionHandler?
     var progressDownloadHandler: ProgressDownloadingHandler?
@@ -46,6 +48,7 @@ class CQDownloadItem: Codable {
         case totalFileSize
         case currentFileSize
         case progress
+        case resumeDataPath
     }
     
     

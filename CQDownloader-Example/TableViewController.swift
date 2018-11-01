@@ -33,8 +33,8 @@ class TableViewController: UITableViewController {
     
     func downloadFile(remoteURL: URL) {
         
-        let number = remoteURL.absoluteString.components(separatedBy: "?id=").last!
-        let filepath = downloader.documentURL(fileName: "\(number).zip")
+        let number = remoteURL.absoluteString.components(separatedBy: "?image=").last!
+        let filepath = downloader.documentURL(fileName: "\(number)")
         
         self.downloader.download(remoteURL: remoteURL, filePathURL: filepath, data: ["Title": number], onProgressHandler: { (downloadItem:CQDownloadItem) in
             
@@ -63,6 +63,7 @@ class TableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! CQDownloaderCell
 
         cell.remoteURL = URL(string:self.dataSource[indexPath.row])
+        cell.delegate = self
         cell.updateCell()
 
         return cell
@@ -72,6 +73,26 @@ class TableViewController: UITableViewController {
         return 140
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let url = URL(string:self.dataSource[indexPath.row]),
+            let downloadItem = CQDownloader.shared.downloadItem(remoteURL: url) else {
+            return
+        }
+        if downloadItem.status == .Done {
+            self.performSegue(withIdentifier: "showImage", sender: downloadItem.filePathURL.path)
+        }
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showImage" {
+            if let vc = segue.destination as? ResultImageViewController {
+                if let path = sender as? String {
+                    vc.imagePath = path
+                }
+            }
+        }
+    }
 
     /*
     // Override to support conditional editing of the table view.
@@ -119,6 +140,23 @@ class TableViewController: UITableViewController {
     */
 
 }
+
+
+extension TableViewController: CQDownloaderCellDelegate {
+    func clickOnDelete(cell: UITableViewCell, remoteURL: URL?) {
+        if let url = remoteURL {
+            if let row = self.dataSource.firstIndex(of: url.absoluteString) {
+                CQDownloader.shared.delete(remoteURL: url)
+                self.tableView.beginUpdates()
+                self.dataSource.remove(at: row)
+                self.tableView.deleteRows(at: [IndexPath(row: row, section: 0)], with: .automatic)
+                self.tableView.endUpdates()
+            }
+        }
+    }
+}
+
+
 
 extension TableViewController: CQDownloaderDelegate {
     

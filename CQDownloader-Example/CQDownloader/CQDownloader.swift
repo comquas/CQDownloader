@@ -51,12 +51,17 @@ class CQDownloader: NSObject {
         }
         
         
+        
+        
     }
+    
+    
     
     // MARK: - Document Path
     func documentURL(fileName: String) -> URL {
         
-        let cacheURL = FileManager.default.urls(for: FileManager.SearchPathDirectory.documentDirectory, in: FileManager.SearchPathDomainMask.userDomainMask).last!
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last!
+        let cacheURL = URL(fileURLWithPath: path)
         return cacheURL.appendingPathComponent(fileName)
     }
     
@@ -109,6 +114,9 @@ extension CQDownloader: URLSessionDownloadDelegate {
     
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         
+        if error == nil {
+            return
+        }
         guard let originalRequestURL = task.originalRequest?.url, let downloadItem = context.loadDownloadItem(withURL: originalRequestURL) else {
             return
         }
@@ -159,7 +167,7 @@ extension CQDownloader: URLSessionDownloadDelegate {
             downloadItem.foregroundCompletionHandler?(.success(downloadItem.filePathURL))
             self.delegate?.CQdownloadFinish(result: .success(downloadItem.filePathURL))
         } catch {
-            
+            print(error)
             downloadItem.status = .Fail
             context.saveDownloadItem(downloadItem)
             downloadItem.foregroundCompletionHandler?(.failure(CQError.invalidData,downloadItem.remoteURL))
@@ -168,7 +176,24 @@ extension CQDownloader: URLSessionDownloadDelegate {
         
     }
     
+    func updateTasks(downloadTask: URLSessionDownloadTask) {
+        
+        var requestURL = downloadTask.originalRequest?.url
+        if requestURL == nil {
+            requestURL = downloadTask.currentRequest?.url
+        }
+        
+        if let url = requestURL {
+            if CQDownloader.shared.tasks[url] == nil {
+                CQDownloader.shared.tasks[url] = downloadTask
+            }
+        }
+    }
+    
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
+        
+        
+        updateTasks(downloadTask: downloadTask)
         
         guard let downloadItem = self.getDownloadItemFromDownloadTask(downloadTask: downloadTask) else {
             return
@@ -218,13 +243,26 @@ extension CQDownloader {
             }
             
             downloadSession.cancel { (data:Data?) in
-                guard let d = data?.base64EncodedString() else {
+                
+                let timestamp = "\(NSDate().timeIntervalSince1970)"
+                
+                let writeURL = self.documentURL(fileName: "cqresume_\(timestamp)")
+                
+                if downloadItem.resumeDataPath != ""  {
                     return
                 }
-                downloadItem.resumeData = d
-                downloadItem.status = .Pause
-                self.context.saveDownloadItem(downloadItem)
-                self.tasks.removeValue(forKey: remoteURL)
+                do {
+                    try data?.write(to: writeURL)
+                    downloadItem.resumeDataPath = writeURL.path
+                    downloadItem.status = .Pause
+                    self.context.saveDownloadItem(downloadItem)
+                    self.tasks.removeValue(forKey: remoteURL)
+                }
+                catch {
+                    print(error)
+                }
+                
+                
             }
             
         }
@@ -236,18 +274,24 @@ extension CQDownloader {
             return
         }
         
-        guard let data = Data(base64Encoded: downloadItem.resumeData) else {
-            return
+        
+        let url = URL(fileURLWithPath:downloadItem.resumeDataPath)
+        
+        do {
+            let data = try Data(contentsOf: url)
+            try FileManager.default.removeItem(at: url)
+            downloadItem.resumeDataPath = ""
+            downloadItem.status = .Progress
+            self.context.saveDownloadItem(downloadItem)
+            
+            let task = session.downloadTask(withResumeData: data)
+            
+            self.tasks[remoteURL] = task
+            task.resume()
         }
-        
-        downloadItem.resumeData = ""
-        downloadItem.status = .Progress
-        self.context.saveDownloadItem(downloadItem)
-        
-        let task = session.downloadTask(withResumeData: data)
-        
-        self.tasks[remoteURL] = task
-        task.resume()
+        catch {
+            print(error)
+        }
     }
     func toggleDownloadAction(remoteURL: URL) {
         

@@ -18,6 +18,7 @@
 		654CF503218A54CC001D6FB2 /* CQDownloadItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654CF502218A54CC001D6FB2 /* CQDownloadItem.swift */; };
 		654CF505218A8981001D6FB2 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654CF504218A8981001D6FB2 /* TableViewController.swift */; };
 		65A6BDED218AA9B6001EA3E5 /* CQDownloaderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A6BDEC218AA9B6001EA3E5 /* CQDownloaderDelegate.swift */; };
+		65A89A20218B0EE700ECBFA9 /* ResultImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A89A1F218B0EE700ECBFA9 /* ResultImageViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		654CF502218A54CC001D6FB2 /* CQDownloadItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CQDownloadItem.swift; sourceTree = "<group>"; };
 		654CF504218A8981001D6FB2 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		65A6BDEC218AA9B6001EA3E5 /* CQDownloaderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CQDownloaderDelegate.swift; sourceTree = "<group>"; };
+		65A89A1F218B0EE700ECBFA9 /* ResultImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultImageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,7 @@
 				654CF4F1218A4E21001D6FB2 /* LaunchScreen.storyboard */,
 				654CF4F4218A4E21001D6FB2 /* Info.plist */,
 				654CF504218A8981001D6FB2 /* TableViewController.swift */,
+				65A89A1F218B0EE700ECBFA9 /* ResultImageViewController.swift */,
 			);
 			path = "CQDownloader-Example";
 			sourceTree = "<group>";
@@ -177,6 +180,7 @@
 				654CF4FF218A5421001D6FB2 /* CQDownloader.swift in Sources */,
 				654CF505218A8981001D6FB2 /* TableViewController.swift in Sources */,
 				654CF4EB218A4E1F001D6FB2 /* ViewController.swift in Sources */,
+				65A89A20218B0EE700ECBFA9 /* ResultImageViewController.swift in Sources */,
 				65A6BDED218AA9B6001EA3E5 /* CQDownloaderDelegate.swift in Sources */,
 				654CF503218A54CC001D6FB2 /* CQDownloadItem.swift in Sources */,
 				654CF4FC218A5286001D6FB2 /* CQDownloaderCell.swift in Sources */,

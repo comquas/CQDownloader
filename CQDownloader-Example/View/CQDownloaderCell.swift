@@ -45,13 +45,22 @@ public struct Units {
     }
 }
 
+protocol CQDownloaderCellDelegate {
+    func  clickOnDelete(cell: UITableViewCell,remoteURL: URL?)
+}
+
 class CQDownloaderCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var percentageLabel: UILabel!
     @IBOutlet weak var progressBar: UIProgressView!
+    @IBOutlet weak var pauseButton: UIButton!
+    @IBOutlet weak var deleteButton: UIButton!
     var remoteURL: URL?
+    let downloader = CQDownloader.shared
+    
+    var delegate: CQDownloaderCellDelegate?
     
     func updateCell() {
         if let url = remoteURL , let downloadItem = CQDownloader.shared.downloadItem(remoteURL: url) {
@@ -62,7 +71,7 @@ class CQDownloaderCell: UITableViewCell {
             
             
             progressLabel.text = "\(currentSize) / \(totalSize)"
-            var percentage = Int(downloadItem.progress * 100)
+            let percentage = Int(downloadItem.progress * 100)
             percentageLabel.text = "\(percentage) %"
             
             var p = downloadItem.progress
@@ -70,6 +79,23 @@ class CQDownloaderCell: UITableViewCell {
                 p = 0
             }
             progressBar.setProgress(p, animated: true)
+            
+            pauseButton.isEnabled = true
+            switch downloadItem.status {
+            case .Done:
+                pauseButton.isHidden = true
+            case .Fail:
+                pauseButton.setTitle("Failed", for: .normal)
+                pauseButton.isEnabled = false
+            case .Pause:
+                pauseButton.setTitle("Resume", for: .normal)
+            case .Progress:
+                pauseButton.setTitle("Pause", for: .normal)
+            case .None:
+                pauseButton.setTitle("Waiting", for: .normal)
+                pauseButton.isEnabled = false
+            }
+            
         }
         else {
             titleLabel.text = ""
@@ -80,10 +106,13 @@ class CQDownloaderCell: UITableViewCell {
     }
     
     @IBAction func pauseResume() {
-        
+        if let url = remoteURL {
+            downloader.toggleDownloadAction(remoteURL: url)
+            self.updateCell()
+        }
     }
     
     @IBAction func delete() {
-        
+        self.delegate?.clickOnDelete(cell: self, remoteURL: self.remoteURL)
     }
 }

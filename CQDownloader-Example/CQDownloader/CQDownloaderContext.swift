@@ -19,6 +19,7 @@ class CQDownloaderContext {
         if let downloadItem = inMemoryDownloadItems[url] {
             return downloadItem
         } else if let downloadItem = loadDownloadItemFromStorage(withURL: url) {
+            
             inMemoryDownloadItems[downloadItem.remoteURL] = downloadItem
             
             return downloadItem
@@ -26,6 +27,19 @@ class CQDownloaderContext {
         
         return nil
     }
+    
+    func getAllProgressItems() -> [URL:CQDownloadItem]? {
+        
+        let items =  inMemoryDownloadItems.filter { (key: URL, value: CQDownloadItem) -> Bool in
+            if value.status == .Progress {
+                return true
+            }
+            return false
+        }
+        return items
+        
+    }
+    
     
     private func loadDownloadItemFromStorage(withURL url: URL) -> CQDownloadItem? {
         guard let encodedData = userDefaults.object(forKey: url.absoluteString) as? Data else {
@@ -61,6 +75,9 @@ class CQDownloaderContext {
         inMemoryDownloadItems[downloadItem.remoteURL] = downloadItem
         
         let encodedData = try? JSONEncoder().encode(downloadItem)
+        
+        
+        
         userDefaults.set(encodedData, forKey: downloadItem.remoteURL.absoluteString)
         
         //check and save in the download list

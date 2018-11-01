@@ -20,8 +20,8 @@ class ViewController: UIViewController {
     
     @IBAction func addToDownload() {
         
-        let number = Int.random(in: 0 ..< 999)
-        let downloadURL = URL(string:"http://ipv4.download.thinkbroadband.com/512MB.zip?id=\(number)")!
+        let number = Int.random(in: 1 ..< 999)
+        let downloadURL = URL(string:"https://picsum.photos/1200/1200/?image=\(number)")!
         
         self.performSegue(withIdentifier: "gotoDownload", sender: downloadURL)
         
