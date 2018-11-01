@@ -1,0 +1,378 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		654CF4E9218A4E1F001D6FB2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654CF4E8218A4E1F001D6FB2 /* AppDelegate.swift */; };
+		654CF4EB218A4E1F001D6FB2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654CF4EA218A4E1F001D6FB2 /* ViewController.swift */; };
+		654CF4EE218A4E1F001D6FB2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 654CF4EC218A4E1F001D6FB2 /* Main.storyboard */; };
+		654CF4F0218A4E21001D6FB2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 654CF4EF218A4E21001D6FB2 /* Assets.xcassets */; };
+		654CF4F3218A4E21001D6FB2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 654CF4F1218A4E21001D6FB2 /* LaunchScreen.storyboard */; };
+		654CF4FC218A5286001D6FB2 /* CQDownloaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654CF4FB218A5286001D6FB2 /* CQDownloaderCell.swift */; };
+		654CF4FF218A5421001D6FB2 /* CQDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654CF4FE218A5421001D6FB2 /* CQDownloader.swift */; };
+		654CF501218A549A001D6FB2 /* CQDownloaderContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654CF500218A549A001D6FB2 /* CQDownloaderContext.swift */; };
+		654CF503218A54CC001D6FB2 /* CQDownloadItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654CF502218A54CC001D6FB2 /* CQDownloadItem.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		654CF4E5218A4E1F001D6FB2 /* CQDownloader-Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CQDownloader-Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		654CF4E8218A4E1F001D6FB2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		654CF4EA218A4E1F001D6FB2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		654CF4ED218A4E1F001D6FB2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		654CF4EF218A4E21001D6FB2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		654CF4F2218A4E21001D6FB2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		654CF4F4218A4E21001D6FB2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		654CF4FB218A5286001D6FB2 /* CQDownloaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CQDownloaderCell.swift; sourceTree = "<group>"; };
+		654CF4FE218A5421001D6FB2 /* CQDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CQDownloader.swift; sourceTree = "<group>"; };
+		654CF500218A549A001D6FB2 /* CQDownloaderContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CQDownloaderContext.swift; sourceTree = "<group>"; };
+		654CF502218A54CC001D6FB2 /* CQDownloadItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CQDownloadItem.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		654CF4E2218A4E1F001D6FB2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		654CF4DC218A4E1F001D6FB2 = {
+			isa = PBXGroup;
+			children = (
+				654CF4E7218A4E1F001D6FB2 /* CQDownloader-Example */,
+				654CF4E6218A4E1F001D6FB2 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		654CF4E6218A4E1F001D6FB2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				654CF4E5218A4E1F001D6FB2 /* CQDownloader-Example.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		654CF4E7218A4E1F001D6FB2 /* CQDownloader-Example */ = {
+			isa = PBXGroup;
+			children = (
+				654CF4FD218A53ED001D6FB2 /* CQDownloader */,
+				654CF4FA218A5272001D6FB2 /* View */,
+				654CF4E8218A4E1F001D6FB2 /* AppDelegate.swift */,
+				654CF4EA218A4E1F001D6FB2 /* ViewController.swift */,
+				654CF4EC218A4E1F001D6FB2 /* Main.storyboard */,
+				654CF4EF218A4E21001D6FB2 /* Assets.xcassets */,
+				654CF4F1218A4E21001D6FB2 /* LaunchScreen.storyboard */,
+				654CF4F4218A4E21001D6FB2 /* Info.plist */,
+			);
+			path = "CQDownloader-Example";
+			sourceTree = "<group>";
+		};
+		654CF4FA218A5272001D6FB2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				654CF4FB218A5286001D6FB2 /* CQDownloaderCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		654CF4FD218A53ED001D6FB2 /* CQDownloader */ = {
+			isa = PBXGroup;
+			children = (
+				654CF4FE218A5421001D6FB2 /* CQDownloader.swift */,
+				654CF500218A549A001D6FB2 /* CQDownloaderContext.swift */,
+				654CF502218A54CC001D6FB2 /* CQDownloadItem.swift */,
+			);
+			path = CQDownloader;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		654CF4E4218A4E1F001D6FB2 /* CQDownloader-Example */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 654CF4F7218A4E21001D6FB2 /* Build configuration list for PBXNativeTarget "CQDownloader-Example" */;
+			buildPhases = (
+				654CF4E1218A4E1F001D6FB2 /* Sources */,
+				654CF4E2218A4E1F001D6FB2 /* Frameworks */,
+				654CF4E3218A4E1F001D6FB2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "CQDownloader-Example";
+			productName = "CQDownloader-Example";
+			productReference = 654CF4E5218A4E1F001D6FB2 /* CQDownloader-Example.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		654CF4DD218A4E1F001D6FB2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1000;
+				LastUpgradeCheck = 1000;
+				ORGANIZATIONNAME = COMQUAS;
+				TargetAttributes = {
+					654CF4E4218A4E1F001D6FB2 = {
+						CreatedOnToolsVersion = 10.0;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = 654CF4E0218A4E1F001D6FB2 /* Build configuration list for PBXProject "CQDownloader-Example" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 654CF4DC218A4E1F001D6FB2;
+			productRefGroup = 654CF4E6218A4E1F001D6FB2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				654CF4E4218A4E1F001D6FB2 /* CQDownloader-Example */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		654CF4E3218A4E1F001D6FB2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				654CF4F3218A4E21001D6FB2 /* LaunchScreen.storyboard in Resources */,
+				654CF4F0218A4E21001D6FB2 /* Assets.xcassets in Resources */,
+				654CF4EE218A4E1F001D6FB2 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		654CF4E1218A4E1F001D6FB2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				654CF4FF218A5421001D6FB2 /* CQDownloader.swift in Sources */,
+				654CF4EB218A4E1F001D6FB2 /* ViewController.swift in Sources */,
+				654CF503218A54CC001D6FB2 /* CQDownloadItem.swift in Sources */,
+				654CF4FC218A5286001D6FB2 /* CQDownloaderCell.swift in Sources */,
+				654CF501218A549A001D6FB2 /* CQDownloaderContext.swift in Sources */,
+				654CF4E9218A4E1F001D6FB2 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		654CF4EC218A4E1F001D6FB2 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				654CF4ED218A4E1F001D6FB2 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		654CF4F1218A4E21001D6FB2 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				654CF4F2218A4E21001D6FB2 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		654CF4F5218A4E21001D6FB2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		654CF4F6218A4E21001D6FB2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		654CF4F8218A4E21001D6FB2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4UP69BH7R6;
+				INFOPLIST_FILE = "CQDownloader-Example/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.comquas.CQDownloader-Example";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		654CF4F9218A4E21001D6FB2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4UP69BH7R6;
+				INFOPLIST_FILE = "CQDownloader-Example/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.comquas.CQDownloader-Example";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		654CF4E0218A4E1F001D6FB2 /* Build configuration list for PBXProject "CQDownloader-Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				654CF4F5218A4E21001D6FB2 /* Debug */,
+				654CF4F6218A4E21001D6FB2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		654CF4F7218A4E21001D6FB2 /* Build configuration list for PBXNativeTarget "CQDownloader-Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				654CF4F8218A4E21001D6FB2 /* Debug */,
+				654CF4F9218A4E21001D6FB2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 654CF4DD218A4E1F001D6FB2 /* Project object */;
+}

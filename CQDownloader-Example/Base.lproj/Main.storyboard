@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mJ7-qW-Vru">
+    <device id="retina6_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="CQDownloader_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WbY-gl-Ymt">
+                                <rect key="frame" x="0.0" y="120" width="414" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Aaj-8r-8jq"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="Add to Download">
+                                    <color key="titleColor" red="0.016356065289346088" green="0.45059581078007438" blue="0.99170225858688354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" red="1" green="0.14438571310000001" blue="0.14999999999999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="addToDownload" destination="BYZ-38-t0r" eventType="touchUpInside" id="pnV-lN-nYJ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4eJ-wU-KhK">
+                                <rect key="frame" x="0.0" y="192" width="414" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="vdl-lN-e8G"/>
+                                </constraints>
+                                <state key="normal" title="Toggle">
+                                    <color key="titleColor" red="0.016356065289999999" green="0.4505958108" blue="0.99170225860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" red="1" green="0.14438571310000001" blue="0.14999999999999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="pauseAndResume" destination="BYZ-38-t0r" eventType="touchUpInside" id="ejR-Ww-eQd"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="4eJ-wU-KhK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="MWL-7b-Uiz"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="4eJ-wU-KhK" secondAttribute="trailing" id="Rhr-1S-ztf"/>
+                            <constraint firstItem="4eJ-wU-KhK" firstAttribute="top" secondItem="WbY-gl-Ymt" secondAttribute="bottom" constant="42" id="S9Q-om-jly"/>
+                            <constraint firstItem="WbY-gl-Ymt" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Wy9-5S-psE"/>
+                            <constraint firstItem="WbY-gl-Ymt" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="32" id="p44-I8-rv7"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="WbY-gl-Ymt" secondAttribute="trailing" id="uSy-0K-Ofc"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="abY-Xy-xes">
+                        <barButtonItem key="rightBarButtonItem" title="Downloader" id="aXv-wk-Pzj">
+                            <connections>
+                                <segue destination="9nx-ml-5Tp" kind="show" id="aiD-q1-y9u"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1076" y="133.5832083958021"/>
+        </scene>
+        <!--Downloader-->
+        <scene sceneID="SiO-pQ-Bp1">
+            <objects>
+                <tableViewController id="9nx-ml-5Tp" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="p2W-Wh-taC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="tableviewCell" rowHeight="88" id="GHL-Qz-Q0H" customClass="CQDownloaderCell" customModule="CQDownloader_Example" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="88"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GHL-Qz-Q0H" id="GZn-Ge-DII">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="87.666666666666671"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="d7n-bj-CZM">
+                                            <rect key="frame" x="20" y="78" width="374" height="2"/>
+                                        </progressView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KD8-fq-bQi">
+                                            <rect key="frame" x="20" y="11" width="374" height="22"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="22" id="mhM-vn-6qz"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HAl-Bm-MBa">
+                                            <rect key="frame" x="20" y="41" width="314" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rHT-kd-hzu">
+                                            <rect key="frame" x="342" y="40" width="42.666666666666686" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="d7n-bj-CZM" firstAttribute="leading" secondItem="GZn-Ge-DII" secondAttribute="leadingMargin" id="8ST-yb-Mnq"/>
+                                        <constraint firstItem="d7n-bj-CZM" firstAttribute="trailing" secondItem="GZn-Ge-DII" secondAttribute="trailingMargin" id="AZF-eu-lsL"/>
+                                        <constraint firstItem="HAl-Bm-MBa" firstAttribute="top" secondItem="KD8-fq-bQi" secondAttribute="bottom" constant="8" id="EW8-gw-13Z"/>
+                                        <constraint firstItem="d7n-bj-CZM" firstAttribute="top" secondItem="HAl-Bm-MBa" secondAttribute="bottom" constant="16" id="GFB-UL-g9p"/>
+                                        <constraint firstItem="rHT-kd-hzu" firstAttribute="top" secondItem="KD8-fq-bQi" secondAttribute="bottom" constant="7" id="XhV-8X-5Gi"/>
+                                        <constraint firstItem="rHT-kd-hzu" firstAttribute="leading" secondItem="HAl-Bm-MBa" secondAttribute="trailing" constant="8" id="dnk-kc-hRV"/>
+                                        <constraint firstAttribute="trailing" secondItem="HAl-Bm-MBa" secondAttribute="trailing" constant="80" id="hoX-yt-CHs"/>
+                                        <constraint firstItem="KD8-fq-bQi" firstAttribute="top" secondItem="GZn-Ge-DII" secondAttribute="topMargin" id="jp1-B6-5o8"/>
+                                        <constraint firstItem="KD8-fq-bQi" firstAttribute="trailing" secondItem="GZn-Ge-DII" secondAttribute="trailingMargin" id="kju-FW-bdp"/>
+                                        <constraint firstItem="KD8-fq-bQi" firstAttribute="leading" secondItem="GZn-Ge-DII" secondAttribute="leadingMargin" id="mdH-Rq-CAG"/>
+                                        <constraint firstItem="HAl-Bm-MBa" firstAttribute="leading" secondItem="GZn-Ge-DII" secondAttribute="leadingMargin" id="uAX-zr-8Ez"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="percentageLabel" destination="rHT-kd-hzu" id="SZf-34-VVc"/>
+                                    <outlet property="progressBar" destination="d7n-bj-CZM" id="dST-et-GQ9"/>
+                                    <outlet property="progressLabel" destination="HAl-Bm-MBa" id="vrf-mx-ZzL"/>
+                                    <outlet property="titleLabel" destination="KD8-fq-bQi" id="Awx-F2-Exy"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="9nx-ml-5Tp" id="ehl-5w-WTx"/>
+                            <outlet property="delegate" destination="9nx-ml-5Tp" id="cAl-eq-pnW"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Downloader" id="ZOO-c0-pAG"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7PU-NL-FF5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1800.8" y="133.5832083958021"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="s3H-wp-Tsp">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mJ7-qW-Vru" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Ttf-jG-eeb">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="EJl-8b-CZ4"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GHm-n1-9Os" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="136.80000000000001" y="-564.46776611694156"/>
+        </scene>
+    </scenes>
+</document>
