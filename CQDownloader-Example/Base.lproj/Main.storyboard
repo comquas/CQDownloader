@@ -67,6 +67,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="9nx-ml-5Tp" kind="show" identifier="gotoDownload" id="rwY-XI-GL9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -75,51 +78,86 @@
         <!--Downloader-->
         <scene sceneID="SiO-pQ-Bp1">
             <objects>
-                <tableViewController id="9nx-ml-5Tp" sceneMemberID="viewController">
+                <tableViewController id="9nx-ml-5Tp" customClass="TableViewController" customModule="CQDownloader_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="p2W-Wh-taC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="tableviewCell" rowHeight="88" id="GHL-Qz-Q0H" customClass="CQDownloaderCell" customModule="CQDownloader_Example" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="414" height="88"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="reuseIdentifier" rowHeight="140" id="GHL-Qz-Q0H" customClass="CQDownloaderCell" customModule="CQDownloader_Example" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="140"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GHL-Qz-Q0H" id="GZn-Ge-DII">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="87.666666666666671"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="139.66666666666666"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="d7n-bj-CZM">
-                                            <rect key="frame" x="20" y="78" width="374" height="2"/>
+                                            <rect key="frame" x="20" y="77" width="374" height="2"/>
                                         </progressView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KD8-fq-bQi">
                                             <rect key="frame" x="20" y="11" width="374" height="22"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="22" id="mhM-vn-6qz"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HAl-Bm-MBa">
-                                            <rect key="frame" x="20" y="41" width="314" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <rect key="frame" x="20" y="41" width="314" height="20"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rHT-kd-hzu">
-                                            <rect key="frame" x="342" y="40" width="42.666666666666686" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <rect key="frame" x="342" y="40" width="43.666666666666686" height="20"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JMa-4R-1T0">
+                                            <rect key="frame" x="20" y="85" width="183" height="44"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="44" id="3rw-XB-U7L"/>
+                                            </constraints>
+                                            <state key="normal" title="Pause">
+                                                <color key="titleColor" red="0.016356065289999999" green="0.4505958108" blue="0.99170225860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </state>
+                                            <state key="highlighted">
+                                                <color key="titleColor" red="1" green="0.14438571310000001" blue="0.14999999999999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="pauseResume" destination="GHL-Qz-Q0H" eventType="touchUpInside" id="M0K-VT-x7c"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cRU-xd-0oM">
+                                            <rect key="frame" x="211" y="85" width="183" height="44"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                            <state key="normal" title="Delete">
+                                                <color key="titleColor" red="0.016356065289999999" green="0.4505958108" blue="0.99170225860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </state>
+                                            <state key="highlighted">
+                                                <color key="titleColor" red="1" green="0.14438571310000001" blue="0.14999999999999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="delete" destination="GHL-Qz-Q0H" eventType="touchUpInside" id="Qjq-ez-T2u"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="d7n-bj-CZM" firstAttribute="leading" secondItem="GZn-Ge-DII" secondAttribute="leadingMargin" id="8ST-yb-Mnq"/>
                                         <constraint firstItem="d7n-bj-CZM" firstAttribute="trailing" secondItem="GZn-Ge-DII" secondAttribute="trailingMargin" id="AZF-eu-lsL"/>
+                                        <constraint firstItem="JMa-4R-1T0" firstAttribute="bottom" secondItem="GZn-Ge-DII" secondAttribute="bottomMargin" id="CZs-QT-zZM"/>
                                         <constraint firstItem="HAl-Bm-MBa" firstAttribute="top" secondItem="KD8-fq-bQi" secondAttribute="bottom" constant="8" id="EW8-gw-13Z"/>
+                                        <constraint firstItem="cRU-xd-0oM" firstAttribute="width" secondItem="JMa-4R-1T0" secondAttribute="width" id="G5v-fl-CAt"/>
                                         <constraint firstItem="d7n-bj-CZM" firstAttribute="top" secondItem="HAl-Bm-MBa" secondAttribute="bottom" constant="16" id="GFB-UL-g9p"/>
+                                        <constraint firstItem="cRU-xd-0oM" firstAttribute="trailing" secondItem="GZn-Ge-DII" secondAttribute="trailingMargin" id="LdU-P4-W6q"/>
+                                        <constraint firstItem="cRU-xd-0oM" firstAttribute="height" secondItem="JMa-4R-1T0" secondAttribute="height" id="S6h-CB-CcL"/>
+                                        <constraint firstItem="cRU-xd-0oM" firstAttribute="leading" secondItem="JMa-4R-1T0" secondAttribute="trailing" constant="8" id="TSs-fL-eMq"/>
                                         <constraint firstItem="rHT-kd-hzu" firstAttribute="top" secondItem="KD8-fq-bQi" secondAttribute="bottom" constant="7" id="XhV-8X-5Gi"/>
+                                        <constraint firstItem="cRU-xd-0oM" firstAttribute="bottom" secondItem="GZn-Ge-DII" secondAttribute="bottomMargin" id="Y9X-Kc-MuR"/>
                                         <constraint firstItem="rHT-kd-hzu" firstAttribute="leading" secondItem="HAl-Bm-MBa" secondAttribute="trailing" constant="8" id="dnk-kc-hRV"/>
+                                        <constraint firstItem="JMa-4R-1T0" firstAttribute="leading" secondItem="GZn-Ge-DII" secondAttribute="leadingMargin" id="hWG-qy-tIj"/>
                                         <constraint firstAttribute="trailing" secondItem="HAl-Bm-MBa" secondAttribute="trailing" constant="80" id="hoX-yt-CHs"/>
                                         <constraint firstItem="KD8-fq-bQi" firstAttribute="top" secondItem="GZn-Ge-DII" secondAttribute="topMargin" id="jp1-B6-5o8"/>
                                         <constraint firstItem="KD8-fq-bQi" firstAttribute="trailing" secondItem="GZn-Ge-DII" secondAttribute="trailingMargin" id="kju-FW-bdp"/>
@@ -144,7 +182,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7PU-NL-FF5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1800.8" y="133.5832083958021"/>
+            <point key="canvasLocation" x="1800.0000000000002" y="133.25892857142856"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="s3H-wp-Tsp">
@@ -165,4 +203,7 @@
             <point key="canvasLocation" x="136.80000000000001" y="-564.46776611694156"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="rwY-XI-GL9"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -10,7 +10,7 @@ import Foundation
 
 enum DataRequestResult<T> {
     case success(T)
-    case failure(Error)
+    case failure(Error,T)
 }
 
 typealias ProgressDownloadingHandler = ((_ item: CQDownloadItem ) -> Void)

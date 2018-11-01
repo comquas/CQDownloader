@@ -37,6 +37,13 @@ class CQDownloaderContext {
     }
     
     // MARK: - Load Items
+    func getAllUrls() -> [String] {
+        
+        if let downloadList = userDefaults.array(forKey: self.downloadListKey) as? [String] {
+            return downloadList
+        }
+        return []
+    }
     
     func loadAllToMemory() {
         if let downloadList = userDefaults.array(forKey: self.downloadListKey) as? [String] {
@@ -54,19 +61,19 @@ class CQDownloaderContext {
         inMemoryDownloadItems[downloadItem.remoteURL] = downloadItem
         
         let encodedData = try? JSONEncoder().encode(downloadItem)
-        userDefaults.set(encodedData, forKey: downloadItem.remoteURL.path)
+        userDefaults.set(encodedData, forKey: downloadItem.remoteURL.absoluteString)
         
         //check and save in the download list
         if var downloadList = userDefaults.array(forKey: self.downloadListKey) as? [String] {
             
             //need to search in list first
-            if downloadList.firstIndex(of: downloadItem.remoteURL.path) == nil {
-                downloadList.append(downloadItem.remoteURL.path)
+            if downloadList.firstIndex(of: downloadItem.remoteURL.absoluteString) == nil {
+                downloadList.append(downloadItem.remoteURL.absoluteString)
             }
             userDefaults.set(downloadList, forKey: self.downloadListKey)
         }
         else {
-            userDefaults.set([], forKey: self.downloadListKey)
+            userDefaults.set([downloadItem.remoteURL.absoluteString], forKey: self.downloadListKey)
         }
         
         userDefaults.synchronize()
@@ -76,11 +83,11 @@ class CQDownloaderContext {
     
     func deleteDownloadItem(_ downloadItem: CQDownloadItem) {
         inMemoryDownloadItems[downloadItem.remoteURL] = nil
-        userDefaults.removeObject(forKey: downloadItem.remoteURL.path)
+        userDefaults.removeObject(forKey: downloadItem.remoteURL.absoluteString)
         
         //remove it from download list
         if let downloadList = userDefaults.array(forKey: self.downloadListKey) as? [String] {
-            let updatedDOwnloadList = downloadList.filter { $0 != downloadItem.remoteURL.path }
+            let updatedDOwnloadList = downloadList.filter { $0 != downloadItem.remoteURL.absoluteString }
             userDefaults.set(updatedDOwnloadList, forKey: self.downloadListKey)
         }
         

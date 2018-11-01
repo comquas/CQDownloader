@@ -26,6 +26,8 @@ class CQDownloader: NSObject {
     private var session: URLSession!
     private var tasks:[URL: URLSessionDownloadTask] = [:]
     
+    var delegate: CQDownloaderDelegate?
+    
     // MARK: - Singleton
     
     static let shared = CQDownloader()
@@ -38,6 +40,8 @@ class CQDownloader: NSObject {
         let configuration = URLSessionConfiguration.background(withIdentifier: backgroundIdentifier)
         session = URLSession(configuration: configuration, delegate: self, delegateQueue: nil)
         
+        self.context.loadAllToMemory()
+        
         session.getTasksWithCompletionHandler { (sessionTask:[URLSessionDataTask], uploadTask:[URLSessionUploadTask], downloadTask:[URLSessionDownloadTask]) in
             for currentTask in downloadTask {
                 if let loadingURL = currentTask.originalRequest?.url {
@@ -45,6 +49,8 @@ class CQDownloader: NSObject {
                 }
             }
         }
+        
+        
     }
     
     // MARK: - Document Path
@@ -60,57 +66,14 @@ class CQDownloader: NSObject {
         return context.loadDownloadItem(withURL: remoteURL)
     }
     
-    func downloadTask(remoteURL: URL) -> URLSessionDownloadTask {
-        return session.downloadTask(with: remoteURL)
-    }
-    
-    // MARK: - Funcation
-    func toggleDownloadAction(remoteURL: URL) {
-        guard let downloadItem = context.loadDownloadItem(withURL: remoteURL) else {
-            return
-        }
-      
-        
-        if downloadItem.status == .Progress {
-            
-            guard let downloadSession = self.tasks[remoteURL] else {
-                return
-            }
-            
-            downloadSession.cancel { (data:Data?) in
-                guard let d = data?.base64EncodedString() else {
-                    return
-                }
-                downloadItem.resumeData = d
-                downloadItem.status = .Pause
-                self.context.saveDownloadItem(downloadItem)
-                self.tasks.removeValue(forKey: remoteURL)
-            }
-        }
-        else if downloadItem.status == .Pause {
-            guard let data = Data(base64Encoded: downloadItem.resumeData) else {
-                return
-            }
-            
-            downloadItem.resumeData = ""
-            downloadItem.status = .Progress
-            self.context.saveDownloadItem(downloadItem)
-            
-            let task = session.downloadTask(withResumeData: data)
-            
-            self.tasks[remoteURL] = task
-            task.resume()
-        }
-    }
-    
     // MARK: - Download
     
-    func download(remoteURL: URL, filePathURL: URL, data: [String:String]?, onProgressHandler: @escaping ProgressDownloadingHandler, completionHandler: @escaping ForegroundDownloadCompletionHandler) {
+    func download(remoteURL: URL, filePathURL: URL, data: [String:String]?, onProgressHandler:  ProgressDownloadingHandler?, completionHandler: ForegroundDownloadCompletionHandler?) {
         if let downloadItem = context.loadDownloadItem(withURL: remoteURL) {
             print("Already downloading: \(remoteURL)")
             downloadItem.foregroundCompletionHandler = completionHandler
             downloadItem.progressDownloadHandler = onProgressHandler
-           
+            
         } else {
             print("Scheduling to download: \(remoteURL)")
             
@@ -155,14 +118,15 @@ extension CQDownloader: URLSessionDownloadDelegate {
         
         if let err = error as NSError? {
             if err.code == -999 {
-                downloadItem.foregroundCompletionHandler?(.failure(CQError.cancel))
                 downloadItem.status = .Pause
+                downloadItem.foregroundCompletionHandler?(.failure(CQError.cancel,downloadItem.remoteURL))
+                self.delegate?.CQdownloadFinish(result: .failure(CQError.cancel,downloadItem.remoteURL))
                 return
             }
         }
         downloadItem.status = .Fail
-        downloadItem.foregroundCompletionHandler?(.failure(CQError.unknown))
-            
+        downloadItem.foregroundCompletionHandler?(.failure(CQError.unknown,downloadItem.remoteURL))
+        self.delegate?.CQdownloadFinish(result: .failure(CQError.unknown,downloadItem.remoteURL))
         
     }
     
@@ -193,15 +157,15 @@ extension CQDownloader: URLSessionDownloadDelegate {
             downloadItem.status = .Done
             context.saveDownloadItem(downloadItem)
             downloadItem.foregroundCompletionHandler?(.success(downloadItem.filePathURL))
+            self.delegate?.CQdownloadFinish(result: .success(downloadItem.filePathURL))
         } catch {
             
             downloadItem.status = .Fail
             context.saveDownloadItem(downloadItem)
-            downloadItem.foregroundCompletionHandler?(.failure(CQError.invalidData))
+            downloadItem.foregroundCompletionHandler?(.failure(CQError.invalidData,downloadItem.remoteURL))
+            self.delegate?.CQdownloadFinish(result: .failure(CQError.invalidData,downloadItem.remoteURL))
         }
         
-        //context.deleteDownloadItem(downloadItem)
-   
     }
     
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
@@ -222,9 +186,91 @@ extension CQDownloader: URLSessionDownloadDelegate {
         context.saveDownloadItem(downloadItem)
         
         downloadItem.progressDownloadHandler?(downloadItem)
+        self.delegate?.CQDownloadProgress(downloadItem: downloadItem)
+        
         
     }
     
     
 }
 
+// MARK: - Funcation
+extension CQDownloader {
+    
+    
+    func getAllUrls() -> [String] {
+        return self.context.getAllUrls()
+    }
+    
+    func pause(remoteURL: URL) {
+        
+        guard let downloadItem = context.loadDownloadItem(withURL: remoteURL) else {
+            return
+        }
+        
+        if downloadItem.status == .Progress {
+            
+            guard let downloadItem = context.loadDownloadItem(withURL: remoteURL) else {
+                return
+            }
+            guard let downloadSession = self.tasks[remoteURL] else {
+                return
+            }
+            
+            downloadSession.cancel { (data:Data?) in
+                guard let d = data?.base64EncodedString() else {
+                    return
+                }
+                downloadItem.resumeData = d
+                downloadItem.status = .Pause
+                self.context.saveDownloadItem(downloadItem)
+                self.tasks.removeValue(forKey: remoteURL)
+            }
+            
+        }
+    }
+    
+    func resume(remoteURL: URL) {
+        
+        guard let downloadItem = context.loadDownloadItem(withURL: remoteURL) else {
+            return
+        }
+        
+        guard let data = Data(base64Encoded: downloadItem.resumeData) else {
+            return
+        }
+        
+        downloadItem.resumeData = ""
+        downloadItem.status = .Progress
+        self.context.saveDownloadItem(downloadItem)
+        
+        let task = session.downloadTask(withResumeData: data)
+        
+        self.tasks[remoteURL] = task
+        task.resume()
+    }
+    func toggleDownloadAction(remoteURL: URL) {
+        
+        guard let downloadItem = context.loadDownloadItem(withURL: remoteURL) else {
+            return
+        }
+        
+        if downloadItem.status == .Progress {
+            self.pause(remoteURL: remoteURL)
+            
+        }
+        else if downloadItem.status == .Pause {
+            self.resume(remoteURL: remoteURL)
+        }
+    }
+    
+    func delete(remoteURL: URL) {
+        guard let downloadItem = context.loadDownloadItem(withURL: remoteURL) else {
+            return
+        }
+        context.deleteDownloadItem(downloadItem)
+        let task = self.tasks[remoteURL]
+        task?.cancel()
+        self.tasks.removeValue(forKey: remoteURL)
+    }
+}
