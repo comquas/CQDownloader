@@ -19,6 +19,7 @@
 		654CF505218A8981001D6FB2 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654CF504218A8981001D6FB2 /* TableViewController.swift */; };
 		65A6BDED218AA9B6001EA3E5 /* CQDownloaderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A6BDEC218AA9B6001EA3E5 /* CQDownloaderDelegate.swift */; };
 		65A89A20218B0EE700ECBFA9 /* ResultImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A89A1F218B0EE700ECBFA9 /* ResultImageViewController.swift */; };
+		65ECBF65218BF25F00119117 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 65ECBF64218BF25F00119117 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		654CF504218A8981001D6FB2 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		65A6BDEC218AA9B6001EA3E5 /* CQDownloaderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CQDownloaderDelegate.swift; sourceTree = "<group>"; };
 		65A89A1F218B0EE700ECBFA9 /* ResultImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultImageViewController.swift; sourceTree = "<group>"; };
+		65ECBF64218BF25F00119117 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +54,7 @@
 		654CF4DC218A4E1F001D6FB2 = {
 			isa = PBXGroup;
 			children = (
+				65ECBF64218BF25F00119117 /* README.md */,
 				654CF4E7218A4E1F001D6FB2 /* CQDownloader-Example */,
 				654CF4E6218A4E1F001D6FB2 /* Products */,
 			);
@@ -166,6 +169,7 @@
 			files = (
 				654CF4F3218A4E21001D6FB2 /* LaunchScreen.storyboard in Resources */,
 				654CF4F0218A4E21001D6FB2 /* Assets.xcassets in Resources */,
+				65ECBF65218BF25F00119117 /* README.md in Resources */,
 				654CF4EE218A4E1F001D6FB2 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
