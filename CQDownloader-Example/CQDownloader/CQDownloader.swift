@@ -15,6 +15,7 @@ enum CQError: Error {
     case missingData
     case serialization
     case invalidData
+    case fileExist
 }
 
 class CQDownloader: NSObject {
@@ -73,7 +74,9 @@ class CQDownloader: NSObject {
     
     // MARK: - Download
     
-    func download(remoteURL: URL, filePathURL: URL, data: [String:String]?, onProgressHandler:  ProgressDownloadingHandler?, completionHandler: ForegroundDownloadCompletionHandler?) {
+    
+    
+    func download(remoteURL: URL, filePathURL: URL, data: [String:String]?,overwrite: Bool = true, onProgressHandler:  ProgressDownloadingHandler?, completionHandler: ForegroundDownloadCompletionHandler?) {
         if let downloadItem = context.loadDownloadItem(withURL: remoteURL) {
             print("Already downloading: \(remoteURL)")
             downloadItem.foregroundCompletionHandler = completionHandler
@@ -82,6 +85,21 @@ class CQDownloader: NSObject {
         } else {
             print("Scheduling to download: \(remoteURL)")
             
+            if fileManager.fileExists(atPath: filePathURL.path) {
+            
+                    if overwrite {
+                        do {
+                        try fileManager.removeItem(at: filePathURL)
+                        }
+                        catch {
+                            print(error)
+                        }
+                    }
+                    else {
+                        completionHandler?(.failure(CQError.fileExist,remoteURL))
+                        return
+                    }
+            }
             let downloadItem = CQDownloadItem(remoteURL: remoteURL, filePathURL: filePathURL,data: data)
             downloadItem.foregroundCompletionHandler = completionHandler
             downloadItem.progressDownloadHandler = onProgressHandler
@@ -316,5 +334,10 @@ extension CQDownloader {
         let task = self.tasks[remoteURL]
         task?.cancel()
         self.tasks.removeValue(forKey: remoteURL)
+        do {
+            try fileManager.removeItem(at: remoteURL)
+        } catch {
+            print(error)
+        }
     }
 }
