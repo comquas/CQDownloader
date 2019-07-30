@@ -50,3 +50,9 @@ if requestURL == nil {
     requestURL = downloadTask.currentRequest?.url
 }
 ```
+
+# Logs
+
+## 30 Jul 2019
+
+- Fixed for Xcode 10.3

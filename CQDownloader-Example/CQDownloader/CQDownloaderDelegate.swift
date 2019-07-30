@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol CQDownloaderDelegate {
-    func CQDownloadProgress(downloadItem: CQDownloadItem)
-    func CQdownloadFinish(result: DataRequestResult<URL>)
-}
+//protocol CQDownloaderDelegate {
+//    func CQDownloadProgress(downloadItem: CQDownloadItem)
+//    func CQdownloadFinish(result: DataRequestResult<URL>)
+//}

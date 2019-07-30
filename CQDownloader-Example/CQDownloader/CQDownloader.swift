@@ -27,7 +27,12 @@ class CQDownloader: NSObject {
     private var session: URLSession!
     private var tasks:[URL: URLSessionDownloadTask] = [:]
     
-    var delegate: CQDownloaderDelegate?
+    var downloadProgress: ((_ download: CQDownloadItem) -> Void)?
+    var downloadFinish: ((_ result: DataRequestResult<URL>) -> Void)?
+    
+//    func CQDownloadProgress(downloadItem: CQDownloadItem)
+//    //    func CQdownloadFinish(result: DataRequestResult<URL>)
+//    var delegate: CQDownloaderDelegate?
     
     // MARK: - Singleton
     
@@ -146,13 +151,20 @@ extension CQDownloader: URLSessionDownloadDelegate {
             if err.code == -999 {
                 downloadItem.status = .Pause
                 downloadItem.foregroundCompletionHandler?(.failure(CQError.cancel,downloadItem.remoteURL))
-                self.delegate?.CQdownloadFinish(result: .failure(CQError.cancel,downloadItem.remoteURL))
+                
+                if let callback = self.downloadFinish {
+                    callback(.failure(CQError.cancel,downloadItem.remoteURL))
+                }
                 return
             }
         }
         downloadItem.status = .Fail
         downloadItem.foregroundCompletionHandler?(.failure(CQError.unknown,downloadItem.remoteURL))
-        self.delegate?.CQdownloadFinish(result: .failure(CQError.unknown,downloadItem.remoteURL))
+        
+        if let callback = self.downloadFinish {
+            callback(.failure(CQError.unknown,downloadItem.remoteURL))
+        }
+        
         
     }
     
@@ -183,13 +195,21 @@ extension CQDownloader: URLSessionDownloadDelegate {
             downloadItem.status = .Done
             context.saveDownloadItem(downloadItem)
             downloadItem.foregroundCompletionHandler?(.success(downloadItem.filePathURL))
-            self.delegate?.CQdownloadFinish(result: .success(downloadItem.filePathURL))
+            
+            
+            if let callback = self.downloadFinish {
+                callback(.success(downloadItem.remoteURL))
+            }
+            
         } catch {
             print(error)
             downloadItem.status = .Fail
             context.saveDownloadItem(downloadItem)
             downloadItem.foregroundCompletionHandler?(.failure(CQError.invalidData,downloadItem.remoteURL))
-            self.delegate?.CQdownloadFinish(result: .failure(CQError.invalidData,downloadItem.remoteURL))
+             
+            if let callback = self.downloadFinish {
+                callback(.failure(CQError.invalidData,downloadItem.remoteURL))
+            }
         }
         
     }
@@ -229,7 +249,10 @@ extension CQDownloader: URLSessionDownloadDelegate {
         context.saveDownloadItem(downloadItem)
         
         downloadItem.progressDownloadHandler?(downloadItem)
-        self.delegate?.CQDownloadProgress(downloadItem: downloadItem)
+        
+        if let callback = self.downloadProgress {
+            callback(downloadItem)
+        }
         
         
     }

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mJ7-qW-Vru">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mJ7-qW-Vru">
     <device id="retina6_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -197,22 +197,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9vI-P4-9HU">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
-                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ysD-Vd-40a">
+                                <rect key="frame" x="167" y="131" width="81" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Open Video"/>
+                                <connections>
+                                    <action selector="open" destination="BG9-Cb-9ry" eventType="touchUpInside" id="cWF-HA-rze"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="9vI-P4-9HU" firstAttribute="leading" secondItem="OAo-QS-LnO" secondAttribute="leading" id="Aiq-Gq-TpO"/>
-                            <constraint firstItem="9vI-P4-9HU" firstAttribute="top" secondItem="OAo-QS-LnO" secondAttribute="top" id="RgY-vl-sp2"/>
-                            <constraint firstItem="OAo-QS-LnO" firstAttribute="bottom" secondItem="9vI-P4-9HU" secondAttribute="bottom" id="dbF-uc-ATS"/>
-                            <constraint firstItem="OAo-QS-LnO" firstAttribute="trailing" secondItem="9vI-P4-9HU" secondAttribute="trailing" id="iQz-fd-B1c"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="OAo-QS-LnO"/>
                     </view>
-                    <connections>
-                        <outlet property="imageView" destination="9vI-P4-9HU" id="Gdy-2t-jzO"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9vR-d4-ASr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

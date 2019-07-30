@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import AVKit
+
 class ResultImageViewController: UIViewController {
 
     @IBOutlet weak var imageView: UIImageView!
@@ -14,6 +16,17 @@ class ResultImageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        imageView.image = UIImage(contentsOfFile: imagePath)
+       
+    }
+    @IBAction func open() {
+        
+        let videoURL = URL(fileURLWithPath: imagePath)
+        let player = AVPlayer(url: videoURL)
+        let playerViewController = AVPlayerViewController()
+        playerViewController.player = player
+        self.present(playerViewController, animated: true) {
+            playerViewController.player!.play()
+        }
+        
     }
 }

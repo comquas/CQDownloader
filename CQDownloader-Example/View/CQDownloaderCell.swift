@@ -45,9 +45,7 @@ public struct Units {
     }
 }
 
-protocol CQDownloaderCellDelegate {
-    func  clickOnDelete(cell: UITableViewCell,remoteURL: URL?)
-}
+
 
 class CQDownloaderCell: UITableViewCell {
     
@@ -60,7 +58,7 @@ class CQDownloaderCell: UITableViewCell {
     var remoteURL: URL?
     let downloader = CQDownloader.shared
     
-    var delegate: CQDownloaderCellDelegate?
+    var clickonDelete: ((_ cell: CQDownloaderCell,_ remoteURL: URL?) -> Void)?
     
     func updateCell() {
         if let url = remoteURL , let downloadItem = CQDownloader.shared.downloadItem(remoteURL: url) {
@@ -69,10 +67,20 @@ class CQDownloaderCell: UITableViewCell {
             let currentSize = Units(bytes: Int64(downloadItem.currentFileSize)).getReadableUnit()
             let totalSize = Units(bytes: Int64(downloadItem.totalFileSize)).getReadableUnit()
             
-            
-            progressLabel.text = "\(currentSize) / \(totalSize)"
+            if (downloadItem.totalFileSize == -1) {
+                progressLabel.text = "\(currentSize) / Unkowned"
+            }
+            else {
+                progressLabel.text = "\(currentSize) / \(totalSize)"
+            }
             let percentage = Int(downloadItem.progress * 100)
-            percentageLabel.text = "\(percentage) %"
+            
+            if (downloadItem.totalFileSize == -1) {
+                percentageLabel.text = "\(currentSize)"
+            }
+            else {
+                percentageLabel.text = "\(percentage) %"
+            }
             
             var p = downloadItem.progress
             if p > 1 {
@@ -114,6 +122,9 @@ class CQDownloaderCell: UITableViewCell {
     }
     
     @IBAction func delete() {
-        self.delegate?.clickOnDelete(cell: self, remoteURL: self.remoteURL)
+        
+        if let callback = self.clickonDelete {
+            callback(self,self.remoteURL)
+        }
     }
 }
