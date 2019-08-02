@@ -74,7 +74,7 @@ class CQDownloader: NSObject {
     // MARK: - Get Download Item
     
     func downloadItem(remoteURL: URL) -> CQDownloadItem? {
-        return context.loadDownloadItem(withURL: remoteURL)
+        return CQDownloader.shared.context.loadDownloadItem(withURL: remoteURL)
     }
     
     // MARK: - Download
@@ -82,7 +82,7 @@ class CQDownloader: NSObject {
     
     
     func download(remoteURL: URL, filePathURL: URL, data: [String:String]?,overwrite: Bool = true, onProgressHandler:  ProgressDownloadingHandler?, completionHandler: ForegroundDownloadCompletionHandler?) {
-        if let downloadItem = context.loadDownloadItem(withURL: remoteURL) {
+        if let downloadItem = CQDownloader.shared.context.loadDownloadItem(withURL: remoteURL) {
             print("Already downloading: \(remoteURL)")
             downloadItem.foregroundCompletionHandler = completionHandler
             downloadItem.progressDownloadHandler = onProgressHandler
@@ -109,7 +109,7 @@ class CQDownloader: NSObject {
             downloadItem.foregroundCompletionHandler = completionHandler
             downloadItem.progressDownloadHandler = onProgressHandler
             downloadItem.status = .Progress
-            context.saveDownloadItem(downloadItem)
+            CQDownloader.shared.context.saveDownloadItem(downloadItem)
             
             let task = session.downloadTask(with: remoteURL)
             
@@ -140,12 +140,12 @@ extension CQDownloader: URLSessionDownloadDelegate {
         if error == nil {
             return
         }
-        guard let originalRequestURL = task.originalRequest?.url, let downloadItem = context.loadDownloadItem(withURL: originalRequestURL) else {
+        guard let originalRequestURL = task.originalRequest?.url, let downloadItem = CQDownloader.shared.context.loadDownloadItem(withURL: originalRequestURL) else {
             return
         }
         
         
-        context.saveDownloadItem(downloadItem)
+        CQDownloader.shared.context.saveDownloadItem(downloadItem)
         
         if let err = error as NSError? {
             if err.code == -999 {
@@ -175,7 +175,7 @@ extension CQDownloader: URLSessionDownloadDelegate {
             requestURL = downloadTask.currentRequest?.url
         }
         
-        guard let requestingURL = requestURL, let downloadItem = context.loadDownloadItem(withURL: requestingURL) else {
+        guard let requestingURL = requestURL, let downloadItem = CQDownloader.shared.context.loadDownloadItem(withURL: requestingURL) else {
             return nil
         }
         return downloadItem
@@ -193,7 +193,7 @@ extension CQDownloader: URLSessionDownloadDelegate {
         do {
             try fileManager.moveItem(at: location, to: downloadItem.filePathURL)
             downloadItem.status = .Done
-            context.saveDownloadItem(downloadItem)
+            CQDownloader.shared.context.saveDownloadItem(downloadItem)
             downloadItem.foregroundCompletionHandler?(.success(downloadItem.filePathURL))
             
             
@@ -204,7 +204,7 @@ extension CQDownloader: URLSessionDownloadDelegate {
         } catch {
             print(error)
             downloadItem.status = .Fail
-            context.saveDownloadItem(downloadItem)
+            CQDownloader.shared.context.saveDownloadItem(downloadItem)
             downloadItem.foregroundCompletionHandler?(.failure(CQError.invalidData,downloadItem.remoteURL))
              
             if let callback = self.downloadFinish {
@@ -246,7 +246,7 @@ extension CQDownloader: URLSessionDownloadDelegate {
         downloadItem.progress = progress
         
         downloadItem.status = .Progress
-        context.saveDownloadItem(downloadItem)
+        CQDownloader.shared.context.saveDownloadItem(downloadItem)
         
         downloadItem.progressDownloadHandler?(downloadItem)
         
@@ -270,13 +270,13 @@ extension CQDownloader {
     
     func pause(remoteURL: URL) {
         
-        guard let downloadItem = context.loadDownloadItem(withURL: remoteURL) else {
+        guard let downloadItem = CQDownloader.shared.context.loadDownloadItem(withURL: remoteURL) else {
             return
         }
         
         if downloadItem.status == .Progress {
             
-            guard let downloadItem = context.loadDownloadItem(withURL: remoteURL) else {
+            guard let downloadItem = CQDownloader.shared.context.loadDownloadItem(withURL: remoteURL) else {
                 return
             }
             guard let downloadSession = self.tasks[remoteURL] else {
@@ -311,7 +311,7 @@ extension CQDownloader {
     
     func resume(remoteURL: URL) {
         
-        guard let downloadItem = context.loadDownloadItem(withURL: remoteURL) else {
+        guard let downloadItem = CQDownloader.shared.context.loadDownloadItem(withURL: remoteURL) else {
             return
         }
         
@@ -336,7 +336,7 @@ extension CQDownloader {
     }
     func toggleDownloadAction(remoteURL: URL) {
         
-        guard let downloadItem = context.loadDownloadItem(withURL: remoteURL) else {
+        guard let downloadItem = CQDownloader.shared.context.loadDownloadItem(withURL: remoteURL) else {
             return
         }
         
@@ -350,10 +350,10 @@ extension CQDownloader {
     }
     
     func delete(remoteURL: URL) {
-        guard let downloadItem = context.loadDownloadItem(withURL: remoteURL) else {
+        guard let downloadItem = CQDownloader.shared.context.loadDownloadItem(withURL: remoteURL) else {
             return
         }
-        context.deleteDownloadItem(downloadItem)
+        CQDownloader.shared.context.deleteDownloadItem(downloadItem)
         let task = self.tasks[remoteURL]
         task?.cancel()
         self.tasks.removeValue(forKey: remoteURL)
