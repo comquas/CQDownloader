@@ -15,6 +15,8 @@ class CQDownloaderContext {
     private let downloadListKey = "CQDOwnloadList"
     // MARK: - Load
     
+    static let shared = CQDownloaderContext()
+    
     func loadDownloadItem(withURL url: URL) -> CQDownloadItem? {
         if let downloadItem = inMemoryDownloadItems[url] {
             return downloadItem
