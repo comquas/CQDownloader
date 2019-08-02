@@ -18,6 +18,8 @@ class CQDownloaderContext {
     static let shared = CQDownloaderContext()
     
     func loadDownloadItem(withURL url: URL) -> CQDownloadItem? {
+        
+        
         if let downloadItem = inMemoryDownloadItems[url] {
             return downloadItem
         } else if let downloadItem = loadDownloadItemFromStorage(withURL: url) {

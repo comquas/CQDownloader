@@ -165,8 +165,7 @@ class TableViewController: UITableViewController {
 
 extension TableViewController  {
     
-    private func updateCell(remoteURL: URL) {
-        
+    private func updateData(remoteURL: URL) {
         DispatchQueue.main.async {
             
             //if let cell = self.tableView.cellForRow(at: IndexPath(row: row, section: 0)) as? CQDownloaderCell {
@@ -174,6 +173,16 @@ extension TableViewController  {
                 cell.updateCell()
             }
             
+        }
+    }
+    
+    private func updateCell(remoteURL: URL) {
+        
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            guard let self = self else {
+                return
+            }
+            self.updateData(remoteURL: remoteURL)
         }
         
     }

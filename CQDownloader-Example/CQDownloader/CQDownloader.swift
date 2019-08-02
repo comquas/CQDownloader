@@ -44,6 +44,7 @@ class CQDownloader: NSObject {
         super.init()
         let backgroundIdentifier = identifier ?? "background.download.session"
         let configuration = URLSessionConfiguration.background(withIdentifier: backgroundIdentifier)
+        configuration.httpMaximumConnectionsPerHost = 1
         session = URLSession(configuration: configuration, delegate: self, delegateQueue: nil)
         
         context.loadAllToMemory()
