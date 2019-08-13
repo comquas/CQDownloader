@@ -76,6 +76,11 @@ class CQDownloaderContext {
     // MARK: - Save
     
     func saveDownloadItem(_ downloadItem: CQDownloadItem) {
+        
+        if(inMemoryDownloadItems[downloadItem.remoteURL] != nil) {
+            return
+        }
+        
         inMemoryDownloadItems[downloadItem.remoteURL] = downloadItem
         
         let encodedData = try? JSONEncoder().encode(downloadItem)
