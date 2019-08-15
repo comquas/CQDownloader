@@ -48,24 +48,15 @@
                                     <action selector="pauseAndResume" destination="BYZ-38-t0r" eventType="touchUpInside" id="ejR-Ww-eQd"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="blf-6s-7R0">
-                                <rect key="frame" x="0.0" y="241" width="414" height="20.333333333333314"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="blf-6s-7R0" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="4rn-Vb-4Re"/>
                             <constraint firstItem="4eJ-wU-KhK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="MWL-7b-Uiz"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="4eJ-wU-KhK" secondAttribute="trailing" id="Rhr-1S-ztf"/>
-                            <constraint firstItem="blf-6s-7R0" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="RnP-4S-m5N"/>
                             <constraint firstItem="4eJ-wU-KhK" firstAttribute="top" secondItem="WbY-gl-Ymt" secondAttribute="bottom" constant="42" id="S9Q-om-jly"/>
                             <constraint firstItem="WbY-gl-Ymt" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Wy9-5S-psE"/>
                             <constraint firstItem="WbY-gl-Ymt" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="32" id="p44-I8-rv7"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="WbY-gl-Ymt" secondAttribute="trailing" id="uSy-0K-Ofc"/>
-                            <constraint firstItem="blf-6s-7R0" firstAttribute="top" secondItem="4eJ-wU-KhK" secondAttribute="bottom" constant="5" id="xse-j3-kG3"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -77,7 +68,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="lbl" destination="blf-6s-7R0" id="v8C-Le-3uu"/>
                         <segue destination="9nx-ml-5Tp" kind="show" identifier="gotoDownload" id="rwY-XI-GL9"/>
                     </connections>
                 </viewController>

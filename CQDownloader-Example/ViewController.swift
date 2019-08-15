@@ -19,8 +19,6 @@ class ViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let userdefault = UserDefaults.standard
-        lbl.text = userdefault.string(forKey: "last") ?? "NO DATA"
     }
     
     

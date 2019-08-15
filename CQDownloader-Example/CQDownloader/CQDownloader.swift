@@ -336,9 +336,6 @@ extension CQDownloader {
                     self.context.saveDownloadItem(downloadItem)
                     self.tasks.removeValue(forKey: remoteURL)
                     
-                    let userdefault = UserDefaults.standard
-                    userdefault.set(writeURL.path, forKey: "last")
-                    userdefault.synchronize()
                 }
                 catch {
                     print(error)
