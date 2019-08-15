@@ -204,12 +204,13 @@ extension TableViewController  {
     
     private func updateCell(remoteURL: URL) {
         
-        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            guard let self = self else {
-                return
-            }
+        DispatchQueue.main.async {
+        
             self.updateData(remoteURL: remoteURL)
+            
         }
+        
+        
         
     }
 
