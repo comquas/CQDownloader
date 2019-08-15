@@ -27,10 +27,11 @@ enum CQDownloadStatus : String,Codable {
 
 class CQDownloadItem: Codable {
     
-    var data: [String:String] = [:]
+   
     let remoteURL: URL
     let filePathURL: URL
     
+    var data: [String:String] = [:]
     var status: CQDownloadStatus = CQDownloadStatus.None
     var totalFileSize: Double = 0.0
     var currentFileSize: Double = 0.0

@@ -36,6 +36,10 @@ class CQDownloader: NSObject {
     
     // MARK: - Singleton
     
+    
+     let group = DispatchGroup()
+    
+    
     static let shared = CQDownloader()
     
     // MARK: - Init
@@ -48,13 +52,20 @@ class CQDownloader: NSObject {
         session = URLSession(configuration: configuration, delegate: self, delegateQueue: nil)
         
         context.loadAllToMemory()
-        
+    
         session.getTasksWithCompletionHandler { (sessionTask:[URLSessionDataTask], uploadTask:[URLSessionUploadTask], downloadTask:[URLSessionDownloadTask]) in
+            
+           
+            
+            
             for currentTask in downloadTask {
                 if let loadingURL = currentTask.originalRequest?.url {
                     self.tasks[loadingURL] = currentTask
+                    
                 }
             }
+            
+            
         }
         
         
@@ -62,7 +73,18 @@ class CQDownloader: NSObject {
         
     }
     
-    
+    func pauseAll() {
+        let urls = self.getAllUrls()
+        
+        for url in urls {
+            if let dlURL = URL(string: url) {
+               
+                    self.pause(remoteURL: dlURL, sync: true)
+            }
+        }
+        
+      
+    }
     
     // MARK: - Document Path
     func documentURL(fileName: String) -> URL {
@@ -83,6 +105,7 @@ class CQDownloader: NSObject {
     
     
     func download(remoteURL: URL, filePathURL: URL, data: [String:String]?,overwrite: Bool = true, onProgressHandler:  ProgressDownloadingHandler?, completionHandler: ForegroundDownloadCompletionHandler?) {
+        
         if let downloadItem = context.loadDownloadItem(withURL: remoteURL) {
             print("Already downloading: \(remoteURL)")
             downloadItem.foregroundCompletionHandler = completionHandler
@@ -191,15 +214,23 @@ extension CQDownloader: URLSessionDownloadDelegate {
         
         
         
+        
         do {
-            try fileManager.moveItem(at: location, to: downloadItem.filePathURL)
-            downloadItem.status = .Done
-            context.saveDownloadItem(downloadItem)
-            downloadItem.foregroundCompletionHandler?(.success(downloadItem.filePathURL))
-            
-            
-            if let callback = self.downloadFinish {
-                callback(.success(downloadItem.remoteURL))
+            if downloadItem.progress == 1.0 {
+                try fileManager.moveItem(at: location, to: downloadItem.filePathURL)
+                downloadItem.status = .Done
+                context.saveDownloadItem(downloadItem)
+                downloadItem.foregroundCompletionHandler?(.success(downloadItem.filePathURL))
+                
+                
+                if let callback = self.downloadFinish {
+                    callback(.success(downloadItem.remoteURL))
+                }
+            }
+            else {
+                if let callback = self.downloadFinish {
+                    callback(.failure(CQError.invalidData, downloadItem.remoteURL))
+                }
             }
             
         } catch {
@@ -269,7 +300,7 @@ extension CQDownloader {
         return self.context.getAllUrls()
     }
     
-    func pause(remoteURL: URL) {
+    func pause(remoteURL: URL,sync: Bool = false) {
         
         guard let downloadItem = context.loadDownloadItem(withURL: remoteURL) else {
             return
@@ -281,7 +312,12 @@ extension CQDownloader {
                 return
             }
             guard let downloadSession = self.tasks[remoteURL] else {
+                
                 return
+            }
+            
+            if(sync) {
+                group.enter()
             }
             
             downloadSession.cancel { (data:Data?) in
@@ -299,12 +335,23 @@ extension CQDownloader {
                     downloadItem.status = .Pause
                     self.context.saveDownloadItem(downloadItem)
                     self.tasks.removeValue(forKey: remoteURL)
+                    
+                    let userdefault = UserDefaults.standard
+                    userdefault.set(writeURL.path, forKey: "last")
+                    userdefault.synchronize()
                 }
                 catch {
                     print(error)
                 }
                 
+                if(sync) {
+                    self.group.leave()
+                }
                 
+            }
+            
+            if(sync) {
+                group.wait()
             }
             
         }
@@ -343,7 +390,6 @@ extension CQDownloader {
         
         if downloadItem.status == .Progress {
             self.pause(remoteURL: remoteURL)
-            
         }
         else if downloadItem.status == .Pause {
             self.resume(remoteURL: remoteURL)

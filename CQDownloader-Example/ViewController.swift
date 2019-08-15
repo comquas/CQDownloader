@@ -11,10 +11,16 @@ import UIKit
 class ViewController: UIViewController {
 
     let downloader = CQDownloader.shared
+    @IBOutlet var lbl: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let userdefault = UserDefaults.standard
+        lbl.text = userdefault.string(forKey: "last") ?? "NO DATA"
     }
     
     

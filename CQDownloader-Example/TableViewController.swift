@@ -92,12 +92,29 @@ class TableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+      
         guard let url = URL(string:self.dataSource[indexPath.row]),
             let downloadItem = CQDownloader.shared.downloadItem(remoteURL: url) else {
                 return
         }
+        
+       
+        
         if downloadItem.status == .Done {
+            let alert = UIAlertController(title: "Progress", message: "DONE \(downloadItem.progress)", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            
+            return
             self.performSegue(withIdentifier: "showImage", sender: downloadItem.filePathURL.path)
+        }
+        else {
+            let alert = UIAlertController(title: "Progress", message: "\(downloadItem.status)", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            
+            return
         }
         
     }

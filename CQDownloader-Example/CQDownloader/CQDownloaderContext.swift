@@ -77,15 +77,24 @@ class CQDownloaderContext {
     
     func saveDownloadItem(_ downloadItem: CQDownloadItem) {
         
+        
         if(inMemoryDownloadItems[downloadItem.remoteURL] != nil) {
-            return
+            
+            inMemoryDownloadItems[downloadItem.remoteURL]?.data = downloadItem.data
+            inMemoryDownloadItems[downloadItem.remoteURL]?.status = downloadItem.status
+            inMemoryDownloadItems[downloadItem.remoteURL]?.totalFileSize = downloadItem.totalFileSize
+            inMemoryDownloadItems[downloadItem.remoteURL]?.currentFileSize = downloadItem.currentFileSize
+            inMemoryDownloadItems[downloadItem.remoteURL]?.progress = downloadItem.progress
+            inMemoryDownloadItems[downloadItem.remoteURL]?.resumeDataPath = downloadItem.resumeDataPath
+            
+            
+            
+        }
+        else {
+            inMemoryDownloadItems[downloadItem.remoteURL] = downloadItem
         }
         
-        inMemoryDownloadItems[downloadItem.remoteURL] = downloadItem
-        
         let encodedData = try? JSONEncoder().encode(downloadItem)
-        
-        
         
         userDefaults.set(encodedData, forKey: downloadItem.remoteURL.absoluteString)
         
