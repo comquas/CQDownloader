@@ -24,6 +24,20 @@ class TableViewController: UITableViewController {
             self.updateCell(remoteURL: downloadItem.remoteURL)
         }
         
+        self.downloader.downloadFinish = { (result: DataRequestResult<URL>) -> Void in
+            
+            switch result {
+            case .success(let url):
+                
+                self.updateCell(remoteURL: url)
+                
+            case .failure(let error,let url):
+                print(error)
+                self.updateCell(remoteURL: url)
+            }
+            
+        }
+        
         if let dl = newdownloadURL {
             self.downloadFile(remoteURL: dl)
         }
@@ -78,6 +92,7 @@ class TableViewController: UITableViewController {
                 }
             }
         }
+        
         cell.updateCell()
         
         if let remoteURL = cell.remoteURL {
@@ -102,17 +117,11 @@ class TableViewController: UITableViewController {
        
         
         if downloadItem.status == .Done {
-            let alert = UIAlertController(title: "Progress", message: "DONE \(downloadItem.progress)", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-            self.present(alert, animated: true, completion: nil)
             
-            return
             self.performSegue(withIdentifier: "showImage", sender: downloadItem.filePathURL.path)
         }
         else {
-            let alert = UIAlertController(title: "Progress", message: "\(downloadItem.status)", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-            self.present(alert, animated: true, completion: nil)
+           
             
             return
         }
@@ -203,21 +212,7 @@ extension TableViewController  {
         }
         
     }
-    func CQDownloadProgress(downloadItem: CQDownloadItem) {
-        
-    }
-    func CQdownloadFinish(result: DataRequestResult<URL>) {
-        switch result {
-        case .success(let url):
-            
-            updateCell(remoteURL: url)
-            
-        case .failure(let error,let url):
-            print(error)
-            updateCell(remoteURL: url)
-        }
-        
-    }
-    
+
+
     
 }

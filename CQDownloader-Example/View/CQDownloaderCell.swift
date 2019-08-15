@@ -73,7 +73,11 @@ class CQDownloaderCell: UITableViewCell {
             else {
                 progressLabel.text = "\(currentSize) / \(totalSize)"
             }
+            
+           
             let percentage = Int(downloadItem.progress * 100)
+            
+            
             
             if (downloadItem.totalFileSize == -1) {
                 percentageLabel.text = "\(currentSize)"

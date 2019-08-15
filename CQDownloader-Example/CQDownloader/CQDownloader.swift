@@ -216,7 +216,7 @@ extension CQDownloader: URLSessionDownloadDelegate {
         
         
         do {
-            if downloadItem.progress == 1.0 {
+            
                 try fileManager.moveItem(at: location, to: downloadItem.filePathURL)
                 downloadItem.status = .Done
                 context.saveDownloadItem(downloadItem)
@@ -226,12 +226,7 @@ extension CQDownloader: URLSessionDownloadDelegate {
                 if let callback = self.downloadFinish {
                     callback(.success(downloadItem.remoteURL))
                 }
-            }
-            else {
-                if let callback = self.downloadFinish {
-                    callback(.failure(CQError.invalidData, downloadItem.remoteURL))
-                }
-            }
+           
             
         } catch {
             print(error)

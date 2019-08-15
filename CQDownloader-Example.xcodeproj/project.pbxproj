@@ -17,7 +17,6 @@
 		654CF501218A549A001D6FB2 /* CQDownloaderContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654CF500218A549A001D6FB2 /* CQDownloaderContext.swift */; };
 		654CF503218A54CC001D6FB2 /* CQDownloadItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654CF502218A54CC001D6FB2 /* CQDownloadItem.swift */; };
 		654CF505218A8981001D6FB2 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654CF504218A8981001D6FB2 /* TableViewController.swift */; };
-		65A6BDED218AA9B6001EA3E5 /* CQDownloaderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A6BDEC218AA9B6001EA3E5 /* CQDownloaderDelegate.swift */; };
 		65A89A20218B0EE700ECBFA9 /* ResultImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A89A1F218B0EE700ECBFA9 /* ResultImageViewController.swift */; };
 		65ECBF65218BF25F00119117 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 65ECBF64218BF25F00119117 /* README.md */; };
 /* End PBXBuildFile section */
@@ -35,7 +34,6 @@
 		654CF500218A549A001D6FB2 /* CQDownloaderContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CQDownloaderContext.swift; sourceTree = "<group>"; };
 		654CF502218A54CC001D6FB2 /* CQDownloadItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CQDownloadItem.swift; sourceTree = "<group>"; };
 		654CF504218A8981001D6FB2 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
-		65A6BDEC218AA9B6001EA3E5 /* CQDownloaderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CQDownloaderDelegate.swift; sourceTree = "<group>"; };
 		65A89A1F218B0EE700ECBFA9 /* ResultImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultImageViewController.swift; sourceTree = "<group>"; };
 		65ECBF64218BF25F00119117 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -99,7 +97,6 @@
 				654CF4FE218A5421001D6FB2 /* CQDownloader.swift */,
 				654CF500218A549A001D6FB2 /* CQDownloaderContext.swift */,
 				654CF502218A54CC001D6FB2 /* CQDownloadItem.swift */,
-				65A6BDEC218AA9B6001EA3E5 /* CQDownloaderDelegate.swift */,
 			);
 			path = CQDownloader;
 			sourceTree = "<group>";
@@ -186,7 +183,6 @@
 				654CF505218A8981001D6FB2 /* TableViewController.swift in Sources */,
 				654CF4EB218A4E1F001D6FB2 /* ViewController.swift in Sources */,
 				65A89A20218B0EE700ECBFA9 /* ResultImageViewController.swift in Sources */,
-				65A6BDED218AA9B6001EA3E5 /* CQDownloaderDelegate.swift in Sources */,
 				654CF503218A54CC001D6FB2 /* CQDownloadItem.swift in Sources */,
 				654CF4FC218A5286001D6FB2 /* CQDownloaderCell.swift in Sources */,
 				654CF501218A549A001D6FB2 /* CQDownloaderContext.swift in Sources */,
